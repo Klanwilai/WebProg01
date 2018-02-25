@@ -2,3 +2,11 @@
   background-color: Black;
   color: Gold;
 }
+
+.alphabet {
+  list-style: none;
+}
+
+.alphabet h1 {
+  font-weight: bold;
+}

@@ -1,0 +1,25 @@
+<!-- <script>
+  // var text = new string("tiss");  //string = objekt
+  // console.log(text);
+  // var text1 = "pikk";             //ikke et objekt
+  // console.log(text1);
+
+  var objekt = {
+    navn: 'Ole Olsen',
+    adresse: 'en adresse 10',
+    alder: 123
+  }
+
+  console.log(objekt);
+
+  objekt.navn = "Ferdinand";
+  objekt.arbeidsgiver = {
+    navn: 'NTNU',
+    fakultet: 'Fakultet for arkitektur og design',
+    institutt: 'institutt for design'
+  }
+
+  console.log(objekt);
+  console.log(objekt.arbeidsgiver.fakultet);
+
+</script> -->

@@ -9,13 +9,19 @@
   </head>
   <body>
 
-    <h1>Undervisning på morran.</h1>
+    <h1>Daniels amazing text analyzer tool.</h1>
 
     <form>
       <textarea name="text-input" rows="8" cols="80" onkeyup="mainFunction()"></textarea>
+
+      <button id="submit-button" type="button">Submit</button>
     </form>
 
     <p id="print-counter"></p>
+    <p id="unique-counter"></p>
+    <p id="word-counter"></p>
+
+    <div id="alphabet-list" class="alphabet"><ul></ul></div>
 
     <script src="scripts.js"></script>
   </body>
