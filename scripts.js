@@ -15,30 +15,34 @@ function mainFunction(){
   var textInput = document.querySelector("textarea").value;
 
   words = textInput                            //We find the words in the array by splitting them with " ",
-    .split(/[\n <>.,\?/()]/)                     //then we make sure to filter out "", so it doesn't add to the counter.
+    .split(/[\n <>.,\?/()]/)                   //then we make sure to filter out "", so it doesn't add to the counter.
     .filter(word => word != "")
     .map(word => word = word.toUpperCase());   //Sets every word to uppercase
 
   var uniqueWords = words.filter((elem, pos, arr) => arr.indexOf(elem) == pos);
-
-  // var word = [uniqueWords.length];
-  // var counter = [uniqueWords.length];
   var wordCounter = words.length;
-  var wordObj = wordCountMerger(words);
+  var wordObj = objectCountCreator(words);
 
 
   console.log(wordObj);
-  counterElem.innerHTML = `You have typed ${charCounter} characters.`; //Pushes text and data to the HTML
+  counterElem.innerHTML = `You have typed ${charCounter} characters.`;          //Pushes text and data to the HTML
   counterUniq.innerHTML = `You have typed ${uniqueWords.length} unique words.`;
   counterWord.innerHTML = `You have typed ${wordCounter}  words.`;
 
-  document.getElementById("submit-button").addEventListener("click", function(){
-    printWordList(wordObj, alphabet);
+  document.getElementById("submit-alphabet").addEventListener("click", function(){    //Print words in alphabetical order
+    printWordListAlph(wordObj, alphabet);
 });
+
+  document.getElementById("submit-count").addEventListener("click", function(){       //Print words by highest to lowest count
+    wordObj.sort(function(a, b) {
+      return a.count - b.count;
+    });
+    printArrayReversed(wordObj);
+  });
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-function wordCountMerger(wordArr) {             //Grabs array as parameter
+function objectCountCreator(wordArr) {          //Grabs array as parameter
  var a = [], b = [], c = [], prev;              //Creates help variables
 
  wordArr.sort();                                //Sorts the array
@@ -47,7 +51,7 @@ function wordCountMerger(wordArr) {             //Grabs array as parameter
          a.push(wordArr[i]);                    //if no, push word to array
          b.push(1);                             //add one to count
      } else{
-         b[b.length-1]++;                       //if yes, + 1 to current index
+         b[b.length-1]++;                       //if yes, + 1 to counter array current index
      }
      prev = wordArr[i];                         //Put element of current index into "prev" variable
  }
@@ -59,43 +63,50 @@ function wordCountMerger(wordArr) {             //Grabs array as parameter
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function printWordList(wO, alph){                     //Takes arrays as parameters
-  var wordStartsWith = false;
-  var startWithA = true;
-  wordList.innerHTML = "";
+function printWordListAlph(wO, alph){                 //Function prints words in alphabetical order. Takes arrays as parameters
+  var wordStartsWith = false;                         //bool which purpose is to check if a word starts with the current letter in the alphabet array
+  var startWithA = true;                              //bool only used to check if there are words starting with the letter "A", more technically index 0 of alphabet array
+  wordList.innerHTML = "";                            //reset wordList
 
-  for(var n = 0; n < alph.length; n++){
+  for(var n = 0; n < alph.length; n++){               //goes through alphabet array
     wordStartsWith = false;
 
-    for(var o = 0; o < wO.length; o++){
-      if(alph[0] === wO[o].id.charAt(0) && startWithA){
-        alphabetList.innerHTML += "<li><h1>" + alph[0] + "</h1></li>";
-        startWithA = false;
+    for(var o = 0; o < wO.length; o++){                                         //Goes through wordObject array
+      if(alph[0] === wO[o].id.charAt(0) && startWithA){                         //if a wordobject starts with "A", and startWithA is true
+        alphabetList.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;           //print a BIG A and set startWithA bool false
+        startWithA = false;                                                     //This so that only one "A" may be printed
       }
-      if(alph[n] === wO[o].id.charAt(0)){
-        showListedWords = "<li>" + wO[o].id + ": " + wO[o].count + "</li>";
+      if(alph[n] === wO[o].id.charAt(0)){                                       //if the first letter of the current word is the same as the current value of the alphabet array
+        showListedWords = `<li>  ${wO[o].id}:   ${wO[o].count}  </li>`;         //Print the word
         wordList.innerHTML += showListedWords;
       }
 
-      if(alph[n+1] === wO[o].id.charAt(0))
-        wordStartsWith = true;
+      if(alph[n+1] === wO[o].id.charAt(0))                                      //if next indexed letter in alphabet array is equal to first letter of current word in the word array
+        wordStartsWith = true;                                                  //set wordStartsWith true
     }
-    if(wordStartsWith){
-      alphabetList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;
+    if(wordStartsWith){                                                         //if wordStartsWith is true
+      alphabetList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;             //Print the next indexed letter of alphabet array
     }
   }
-  // wordList.innerHTML = "";                      //Reset wordList
-  // for(var o = 0; o < wO.length; o++){           //Goes through array, print object key values
-  //   showListedWords = "<li>" + wO[o].id + ": " + wO[o].count + "</li>";
-  //   wordList.innerHTML += showListedWords;
-  // }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-function printAlphabet(){
+function printArrayReversed(wO){                                                //reverses and prints out array
+  wordList.innerHTML = "";
+  wO = wO.reverse();
+  for(var h = 0; h < wO.length; h++){
+    showListedWords = `<li> ${wO[h].id}:   ${wO[h].count} </li>`
+    wordList.innerHTML += showListedWords;
+  }
+}
 
+////////////////////////////////////////////////////////////////////////////////
 
+class TheBestWordClassEver{
+  constructor(input, output){
+    
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +144,8 @@ function printAlphabet(){
 //   }
 // }
 
-// wordObj.sort(function(a, b) {
-//   return a.count - b.count;
-// });
-// console.log(wordObj);
+// wordList.innerHTML = "";                      //Reset wordList
+// for(var o = 0; o < wO.length; o++){           //Goes through array, print object key values
+//   showListedWords = "<li>" + wO[o].id + ": " + wO[o].count + "</li>";
+//   wordList.innerHTML += showListedWords;
+// }
