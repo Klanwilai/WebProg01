@@ -1,7 +1,6 @@
 const counterElem = document.querySelector("#print-counter"); //Creates element to print data to the HTML
 const counterUniq = document.querySelector("#unique-counter");
 const counterWord = document.querySelector("#word-counter");
-const alphabetList = document.querySelector("#alphabet-list");
 const wordList = document.querySelector("#alphabet-list");
 const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Æ", "Ø", "Å"];
 
@@ -73,7 +72,7 @@ function printWordListAlph(wO, alph){                 //Function prints words in
 
     for(var o = 0; o < wO.length; o++){                                         //Goes through wordObject array
       if(alph[0] === wO[o].id.charAt(0) && startWithA){                         //if a wordobject starts with "A", and startWithA is true
-        alphabetList.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;           //print a BIG A and set startWithA bool false
+        wordList.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;           //print a BIG A and set startWithA bool false
         startWithA = false;                                                     //This so that only one "A" may be printed
       }
       if(alph[n] === wO[o].id.charAt(0)){                                       //if the first letter of the current word is the same as the current value of the alphabet array
@@ -85,7 +84,7 @@ function printWordListAlph(wO, alph){                 //Function prints words in
         wordStartsWith = true;                                                  //set wordStartsWith true
     }
     if(wordStartsWith){                                                         //if wordStartsWith is true
-      alphabetList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;             //Print the next indexed letter of alphabet array
+      wordList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;             //Print the next indexed letter of alphabet array
     }
   }
 }
@@ -105,7 +104,7 @@ function printArrayReversed(wO){                                                
 
 class TheBestWordClassEver{
   constructor(input, output){
-    
+
   }
 }
 
