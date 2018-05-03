@@ -67,25 +67,30 @@ function printWordListAlph(wO, alph){                 //Function prints words in
   var startWithA = true;                              //bool only used to check if there are words starting with the letter "A", more technically index 0 of alphabet array
   wordList.innerHTML = "";                            //reset wordList
 
-  for(var n = 0; n < alph.length; n++){               //goes through alphabet array
-    wordStartsWith = false;
-
-    for(var o = 0; o < wO.length; o++){                                         //Goes through wordObject array
-      if(alph[0] === wO[o].id.charAt(0) && startWithA){                         //if a wordobject starts with "A", and startWithA is true
-        wordList.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;           //print a BIG A and set startWithA bool false
-        startWithA = false;                                                     //This so that only one "A" may be printed
-      }
-      if(alph[n] === wO[o].id.charAt(0)){                                       //if the first letter of the current word is the same as the current value of the alphabet array
-        showListedWords = `<li>  ${wO[o].id}:   ${wO[o].count}  </li>`;         //Print the word
+  print wO[0].id.charAt(0)
+  for(var n = 0; n < wO.length; n++){               //goes through alphabet array
+    // wordStartsWith = false;
+    //
+    var prev;
+    prev = wO[n].id.charAt(0)
+    if (prev !== wO[n].id.charAt(0))
+      print wO[n].id.charAt(0)
+    // for(var o = 0; o < wO.length; o++){                                         //Goes through wordObject array
+    //   if(alph[0] === wO[o].id.charAt(0) && startWithA){                         //if a wordobject starts with "A", and startWithA is true
+    //     wordList.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;           //print a BIG A and set startWithA bool false
+    //     startWithA = false;                                                     //This so that only one "A" may be printed
+    //   }
+    //   if(alph[n] === wO[o].id.charAt(0)){                                       //if the first letter of the current word is the same as the current value of the alphabet array
+        showListedWords = `<li>  ${wO[n].id}:   ${wO[n].count}  </li>`;         //Print the word
         wordList.innerHTML += showListedWords;
-      }
-
-      if(alph[n+1] === wO[o].id.charAt(0))                                      //if next indexed letter in alphabet array is equal to first letter of current word in the word array
-        wordStartsWith = true;                                                  //set wordStartsWith true
-    }
-    if(wordStartsWith){                                                         //if wordStartsWith is true
-      wordList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;             //Print the next indexed letter of alphabet array
-    }
+  //     }
+  //
+  //     if(alph[n+1] === wO[o].id.charAt(0))                                      //if next indexed letter in alphabet array is equal to first letter of current word in the word array
+  //       wordStartsWith = true;                                                  //set wordStartsWith true
+  //   }
+  //   if(wordStartsWith){                                                         //if wordStartsWith is true
+  //     wordList.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;             //Print the next indexed letter of alphabet array
+  //   }
   }
 }
 

@@ -30,20 +30,20 @@ class MyAwesomeWordClass {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-  objectCountCreator(wordArr) {                   //Grabs array as parameter
-   var a = [], b = [], c = [], prev;              //Creates help variables
+  objectCountCreator(wordArr) {                  
+   var a = [], b = [], c = [], prev;             
 
-   wordArr.sort();                                //Sorts the array
-   for(var i = 0; i < wordArr.length; i++){       //For loop goes through array
-       if(wordArr[i] !== prev){                   //Checks if current indexed element is equal to previous index
-           a.push(wordArr[i]);                    //if no, push word to array
-           b.push(1);                             //add one to count
+   wordArr.sort();                               
+   for(var i = 0; i < wordArr.length; i++){      
+       if(wordArr[i] !== prev){                  
+           a.push(wordArr[i]);                   
+           b.push(1);                             
        } else{
-           b[b.length-1]++;                       //if yes, + 1 to counter array current index
+           b[b.length-1]++;                       
        }
-       prev = wordArr[i];                         //Put element of current index into "prev" variable
+       prev = wordArr[i];                         
    }
-   for(var j = 0; j < a.length; j++){             //fills array c with objects consisting the value of array a and b
+   for(var j = 0; j < a.length; j++){            
      c[j] = {id: a[j], count: b[j]};
    }
    return c;
@@ -51,30 +51,30 @@ class MyAwesomeWordClass {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-  printWordListAlph(wO, alph, output){                  //Function prints words in alphabetical order. Takes arrays as parameters
-    var wordStartsWith = false;                         //bool which purpose is to check if a word starts with the current letter in the alphabet array
-    var startWithA = true;                              //bool only used to check if there are words starting with the letter "A", more technically index 0 of alphabet array
-    var showListedWords = "";                           //reset wordList
+  printWordListAlph(wO, alph, output){
+    var wordStartsWith = false;
+    var startWithA = true;
+    var showListedWords = "";
     output.innerHTML = "";
 
-    for(var n = 0; n < alph.length; n++){               //goes through alphabet array
+    for(var n = 0; n < alph.length; n++){
       wordStartsWith = false;
 
-      for(var o = 0; o < wO.length; o++){                                         //Goes through wordObject array
-        if(alph[0] === wO[o].id.charAt(0) && startWithA){                         //if a wordobject starts with "A", and startWithA is true
-          output.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;                 //print a BIG A and set startWithA bool false
-          startWithA = false;                                                     //This so that only one "A" may be printed
+      for(var o = 0; o < wO.length; o++){
+        if(alph[0] === wO[o].id.charAt(0) && startWithA){
+          output.innerHTML += `<li><h1>  ${alph[0]}  </h1></li>`;
+          startWithA = false;
         }
-        if(alph[n] === wO[o].id.charAt(0)){                                       //if the first letter of the current word is the same as the current value of the alphabet array
-          showListedWords = `<li>  ${wO[o].id}:   ${wO[o].count}  </li>`;         //Print the word
+        if(alph[n] === wO[o].id.charAt(0)){
+          showListedWords = `<li>  ${wO[o].id}:   ${wO[o].count}  </li>`;
           output.innerHTML += showListedWords;
         }
 
-        if(alph[n+1] === wO[o].id.charAt(0))                                      //if next indexed letter in alphabet array is equal to first letter of current word in the word array
-          wordStartsWith = true;                                                  //set wordStartsWith true
+        if(alph[n+1] === wO[o].id.charAt(0))
+          wordStartsWith = true;
       }
-      if(wordStartsWith){                                                         //if wordStartsWith is true
-        output.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;                   //Print the next indexed letter of alphabet array
+      if(wordStartsWith){
+        output.innerHTML += `<li><h1> ${alph[n+1]} </h1></li>`;
       }
     }
   }
